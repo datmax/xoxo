@@ -7,6 +7,8 @@ import game from './scripts/game';
 
 window.onload = () =>{
 
+
+    //Just some sample code to make a square move.
     const canvas = <HTMLCanvasElement> document.getElementById("c");
     canvas.width = screen.width/2;
     canvas.height = screen.height /1.5;
