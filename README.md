@@ -32,3 +32,6 @@ For example, if you have a Skeleton enemy you'll extend the entity class and hav
 
 # Feedback is very appreciated!
 
+
+# Q: Why am i making this?
+## A: I'm bored
