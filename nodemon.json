@@ -2,6 +2,6 @@
   "events": {
     "restart": "npm run build"
   },
-  "ignore": ["./dist"]
+  "ignore": [ "./src/*.d.ts"]
 
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "serve": "webpack && nodemon"
+    "serve": "nodemon"
   },
   "author": "Max Datsun",
   "license": "ISC",
@@ -14,10 +14,14 @@
     "awesome-typescript-loader": "^5.2.1",
     "express": "^4.17.1",
     "socket-io": "^1.0.0",
-    "source-map-loader": "^0.2.4"
+    "source-map-loader": "^0.2.4",
+    "webpack-dev-middleware": "^3.7.2"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "ts-loader": "^6.2.1",
+    "ts-node": "^8.6.2",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",

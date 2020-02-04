@@ -8,6 +8,7 @@ export default class Entity {
   ctx: CanvasRenderingContext2D;
   sprite: string
 
+  //Sets entity position in given canvas context
   constructor(x:number, y:number, ctx:CanvasRenderingContext2D) {
     this.x = x;
     this.y = y;
@@ -16,11 +17,15 @@ export default class Entity {
   }
 
 
+  //This function is called ALWAYS betweeen a clear and a draw cycle, to not
+  //have weird things happening
   move(x:number, y:number):void{
     this.x += x;
     this.y -= y;
   }
 
+
+  //Still doesn't work, searching for a good approach 
   addSprite(path: string): void{
     this.sprite = path;
   } 
