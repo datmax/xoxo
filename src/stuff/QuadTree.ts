@@ -54,6 +54,26 @@ class QuadTree{
         
     }
 
+    queryObj(obj:Entity): Entity[]{
+        if(this.regions.length == 0){
+            return this.objs;
+        }
+        else{
+            if(obj.x > this.x && obj.x + obj.w < (this.x + this.w)/2 && obj.y > this.y && obj.y+obj.h < this.y + this.h){
+                return this.regions[0].queryObj(obj);
+            }
+            if(obj.x > (this.x + this.w)/2 && obj.x + obj.w < this.x + this.w && obj.y > this.y && obj.y+obj.h < this.y + this.h){
+                return this.regions[1].queryObj(obj);
+            }
+            if(obj.x > this.x && obj.x + obj.w < (this.x + this.w)/2 && obj.y > (this.y + this.h)/2 && obj.y + obj.h > this.y + this.h){
+                return this.regions[2].queryObj(obj);
+            }
+            if(obj.x > (this.x + this.w)/2 && obj.x + obj.w < this.x + this.w && obj.y > (this.y + this.h)/2 && obj.y + obj.h > this.y + this.h){
+                return this.regions[3].queryObj(obj);
+            }
+        }
+    }
+
 }
 
 

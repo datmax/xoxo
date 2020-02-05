@@ -44,7 +44,6 @@ export default class Player extends Entity {
     render(): void {
         utils.clearRect(this.x, this.y, this.w, this.h, this.ctx);
         this.move(this.speed_x * game.gravity, this.speed_y*game.gravity);
-        //console.log(this.x, this.y)
         utils.drawRect(this.x, this.y, this.w, this.h, this.ctx, "black")
     }
 

@@ -58,7 +58,6 @@ const utils = {
     clearRect(x:number,y:number,w:number,h:number,ctx:CanvasRenderingContext2D):void{
         ctx.clearRect(x,y,w,h);
     }
-
 }
 
 export default utils;

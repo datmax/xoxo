@@ -23,7 +23,13 @@ window.onload = () =>{
     const c = new Player(20,40,5,5, ctx, 100);
 
     const d = new Player(25,60,5,5, ctx, 100);
-    const f = new Player(5,100,5,5, ctx, 100);
+    const f = new Player(50,100,5,5, ctx, 100);
+    const g = new Player(200,400,5,5, ctx, 100);
+    const h = new Player(300,300,5,5, ctx, 100);
+    const i = new Player(600,200,5,5, ctx, 100);
+    const j = new Player(370,300,5,5, ctx, 100);
+    const k = new Player(90,370,5,5, ctx, 100);
+    console.log(quadtree.queryObj(i));
 
     console.log(quadtree);
 

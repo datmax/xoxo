@@ -1,6 +1,11 @@
 import Entity from "./entity";
 import QuadTree from "../stuff/QuadTree";
 
+interface Sprite {
+    name: string,
+    src: string
+}
+
 const game = {
 
     //Global game objects
@@ -10,6 +15,7 @@ const game = {
     layers:<HTMLCanvasElement[]> [],
     gravity: 0.5,
     quadTree:<QuadTree> null,
+    sprites:<Sprite[]> [],
 
 
     //Add canvas with a given id, width and height;
@@ -25,7 +31,9 @@ const game = {
         this.objects.push(obj);
     },
 
-
+    addSprite(name, src){
+        this.sprites.push({name, src});
+    },
         
     render(): void{
         for(let i = 0; i < this.objects.length; i++){
