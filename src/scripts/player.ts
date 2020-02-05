@@ -1,5 +1,5 @@
 import Entity from "./entity";
-import utils from "./utils";
+import utils from "../stuff/utils";
 import game from "./game";
 
 export default class Player extends Entity {
@@ -44,7 +44,7 @@ export default class Player extends Entity {
     render(): void {
         utils.clearRect(this.x, this.y, this.w, this.h, this.ctx);
         this.move(this.speed_x * game.gravity, this.speed_y*game.gravity);
-        console.log(this.x, this.y)
+        //console.log(this.x, this.y)
         utils.drawRect(this.x, this.y, this.w, this.h, this.ctx, "black")
     }
 

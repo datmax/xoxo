@@ -1,4 +1,5 @@
 import Entity from "./entity";
+import QuadTree from "../stuff/QuadTree";
 
 const game = {
 
@@ -8,6 +9,7 @@ const game = {
     objects:<Entity[]> [],
     layers:<HTMLCanvasElement[]> [],
     gravity: 0.5,
+    quadTree:<QuadTree> null,
 
 
     //Add canvas with a given id, width and height;

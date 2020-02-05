@@ -1,10 +1,12 @@
 import game from "./game";
-import utils from "./utils";
+import utils from "../stuff/utils";
 
 export default class Entity {
   
   x: number;
   y:number;
+  w = 0;
+  h = 0;
   ctx: CanvasRenderingContext2D;
   sprite: string
 
@@ -14,6 +16,7 @@ export default class Entity {
     this.y = y;
     this.ctx = ctx;
     game.addObject(this);
+    game.quadTree.insert(this);
   }
 
 
