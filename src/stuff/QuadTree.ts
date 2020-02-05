@@ -1,6 +1,9 @@
 import game from "../scripts/game";
 import Entity from "../scripts/entity";
 
+//----------------------------------------------------------------//
+//--------THIS TOOK ME AN ENTIRE FUCKING DAY AAAAAAAA-------------//
+//----------------------------------------------------------------//
 
 class QuadTree{
     regions:QuadTree[] = []
@@ -20,6 +23,9 @@ class QuadTree{
         this.h = h;
     }
 
+
+    //Create the four regions. Then clear this.objs because 
+    //only the leafs should have elements in objs
     subdivide():void{
         console.log("subdivide");
         this.regions.push(new QuadTree(this.x, this.w/2, this.y ,this.h/2)); //TOP LEFT
