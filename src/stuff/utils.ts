@@ -1,5 +1,11 @@
 import Player from "../scripts/player";
 
+interface vector{
+    x:number,
+    y:number
+}
+
+
 const utils = {
 
     eventHanlderDown(event:any, player:Player){
@@ -58,6 +64,7 @@ const utils = {
     clearRect(x:number,y:number,w:number,h:number,ctx:CanvasRenderingContext2D):void{
         ctx.clearRect(x,y,w,h);
     }
+
 }
 
 export default utils;

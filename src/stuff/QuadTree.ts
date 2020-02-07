@@ -1,5 +1,6 @@
 import game from "../scripts/game";
 import Entity from "../scripts/entity";
+import utils from "./utils";
 
 //----------------------------------------------------------------//
 //--------THIS TOOK ME AN ENTIRE FUCKING DAY AAAAAAAA-------------//
@@ -28,26 +29,29 @@ class QuadTree{
     //only the leafs should have elements in objs
     subdivide():void{
         console.log("subdivide");
-        this.regions.push(new QuadTree(this.x, this.w/2, this.y ,this.h/2)); //TOP LEFT
-        this.regions.push(new QuadTree((this.x + this.w)/2, this.w/2, this.y, this.h/2)); //TOP RIGHT
-        this.regions.push(new QuadTree(this.x, this.w/2, (this.y + this.h)/ 2, this.h/2)); //BOTTOM LEFT
-        this.regions.push(new QuadTree((this.x, this.w)/2, this.w/2, (this.y + this.h)/ 2, this.h/2)); //BOTTOM RIGHT
+        let temp = [];
+        temp = this.objs;
+        this.objs = [];
+        this.regions.push(new QuadTree(this.x,              this.w/2, this.y,               this.h/2)); //TOP LEFT
+        this.regions.push(new QuadTree(this.x + this.w/2,   this.w/2, this.y,               this.h/2)); //TOP RIGHT
+        this.regions.push(new QuadTree(this.x,              this.w/2, this.y + this.h/ 2,   this.h/2)); //BOTTOM LEFT
+        this.regions.push(new QuadTree(this.x + this.w/2,   this.w/2, this.y + this.h/ 2,   this.h/2)); //BOTTOM RIGHT
 
         for(let i = 0; i < this.objs.length; i++){
             this.insert(this.objs[i]);
         }
 
-        this.objs = [];
     }
 
 
     insert(obj:Entity):void{
         if(this.objs.length >= this.max && this.regions.length == 0){
+            console.log(this.objs);
             this.subdivide();
         }
         else{
            if(this.regions.length == 0){
-               if(obj.x >= this.x && obj.x + obj.w <= this.x + this.w && obj.y >= this.y && obj.y + obj.h <= this.y + this.h){
+               if(obj.x >= this.x && obj.x <= this.x + this.w && obj.y >= this.y && obj.y<= this.y + this.h){
                    this.objs.push(obj);
                }
            }
@@ -65,17 +69,28 @@ class QuadTree{
             return this.objs;
         }
         else{
-            if(obj.x > this.x && obj.x + obj.w < (this.x + this.w)/2 && obj.y > this.y && obj.y+obj.h < this.y + this.h){
+            if(obj.x > this.x && obj.x + obj.w < this.x + this.w/2 && obj.y > this.y && obj.y+obj.h < this.y + this.h){
                 return this.regions[0].queryObj(obj);
             }
-            if(obj.x > (this.x + this.w)/2 && obj.x + obj.w < this.x + this.w && obj.y > this.y && obj.y+obj.h < this.y + this.h){
+            if(obj.x > this.x + this.w/2 && obj.x + obj.w < this.x + this.w && obj.y > this.y && obj.y+obj.h < this.y + this.h){
                 return this.regions[1].queryObj(obj);
             }
-            if(obj.x > this.x && obj.x + obj.w < (this.x + this.w)/2 && obj.y > (this.y + this.h)/2 && obj.y + obj.h > this.y + this.h){
+            if(obj.x > this.x && obj.x + obj.w < this.x + this.w/2 && obj.y > this.y + this.h/2 && obj.y + obj.h > this.y + this.h){
                 return this.regions[2].queryObj(obj);
             }
-            if(obj.x > (this.x + this.w)/2 && obj.x + obj.w < this.x + this.w && obj.y > (this.y + this.h)/2 && obj.y + obj.h > this.y + this.h){
+            if(obj.x > (this.x + this.w)/2 && obj.x + obj.w < this.x + this.w && obj.y > this.y + this.h/2 && obj.y + obj.h > this.y + this.h){
                 return this.regions[3].queryObj(obj);
+            }
+        }
+    }
+
+    drawQuad(ctx: CanvasRenderingContext2D):void{
+        utils.drawRect(Math.floor(this.x + this.w/2), Math.floor(this.y),             1,                    Math.floor(this.h), ctx, "red"  );
+        utils.drawRect(Math.floor(this.x),              Math.floor(this.y+ this.h/2), Math.floor(this.w), 1,                    ctx, "blue");
+        if(this.regions.length>0){
+            for(let i = 0; i < this.regions.length;i++){
+                this.regions[i].drawQuad(ctx);
+                console.log(this.regions[2]);
             }
         }
     }

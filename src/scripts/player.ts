@@ -1,6 +1,7 @@
 import Entity from "./entity";
 import utils from "../stuff/utils";
 import game from "./game";
+import QuadTree from "../stuff/QuadTree";
 
 export default class Player extends Entity {
 
@@ -17,9 +18,13 @@ export default class Player extends Entity {
         super(x, y, ctx);
         this.w = w;
         this.h = h;
-        this.life = life;
         this.speed_x = 0;
         this.speed_y = 0;
+        this.enableInputHandler();
+    }
+
+
+    enableInputHandler(){
         window.addEventListener("keydown", (e) => {
             this.handleKeyDown(e);
         });
@@ -27,7 +32,6 @@ export default class Player extends Entity {
             this.handleKeyUp(e);
         })
     }
-
 
     handleKeyDown(event) {
         if (event) {
@@ -41,9 +45,20 @@ export default class Player extends Entity {
         }
     }
 
+    checkCollisions(){
+        let objs = game.quadTree.queryObj(this);
+        for(let i = 0; i < objs.length; i++){
+            if(this.x >= objs[i].x && this.x + this.w <= objs[i].x + objs[i].w 
+               && this.y >= objs[i].y && this.y + this.h <= objs[i].y + objs[i].h && typeof objs[i] != typeof this){
+                   console.log(objs[i]);
+               }
+        }
+    }
+
     render(): void {
         utils.clearRect(this.x, this.y, this.w, this.h, this.ctx);
-        this.move(this.speed_x * game.gravity, this.speed_y*game.gravity);
+        this.move(this.speed_x / game.gravity, this.speed_y/game.gravity);
+        this.checkCollisions();
         utils.drawRect(this.x, this.y, this.w, this.h, this.ctx, "black")
     }
 

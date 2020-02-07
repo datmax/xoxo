@@ -3,6 +3,7 @@ import Player from "./scripts/player";
 import utils from "./stuff/utils";
 import game from './scripts/game';
 import QuadTree from './stuff/QuadTree';
+import Block from "./scripts/block";
 
 
 
@@ -19,19 +20,17 @@ window.onload = () =>{
     game.quadTree = quadtree;
     const player = new Player(30,40,5,5, ctx, 100);
     //const a = new Player(10,40,5,5, ctx, 100);
-    const b = new Player(35,45,5,5, ctx, 100);
-    const c = new Player(20,40,5,5, ctx, 100);
+    for(let i = 0; i < 10; i++){
+        new Block(i*20, 300, 10, 10, ctx );
+    }
 
-    const d = new Player(25,60,5,5, ctx, 100);
-    const f = new Player(50,100,5,5, ctx, 100);
-    const g = new Player(200,400,5,5, ctx, 100);
-    const h = new Player(300,300,5,5, ctx, 100);
-    const i = new Player(600,200,5,5, ctx, 100);
-    const j = new Player(370,300,5,5, ctx, 100);
-    const k = new Player(90,370,5,5, ctx, 100);
-    console.log(quadtree.queryObj(i));
+
+
+
+
 
     console.log(quadtree);
+    quadtree.drawQuad(ctx);
 
 
     game.render();

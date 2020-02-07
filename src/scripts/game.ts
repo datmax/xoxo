@@ -13,7 +13,7 @@ const game = {
     deltaTime:<number> 0.016,
     objects:<Entity[]> [],
     layers:<HTMLCanvasElement[]> [],
-    gravity: 0.5,
+    gravity: 10,
     quadTree:<QuadTree> null,
     sprites:<Sprite[]> [],
 
@@ -27,11 +27,10 @@ const game = {
     },
 
     addObject(obj: Entity): void {
-        console.log(obj);
         this.objects.push(obj);
     },
 
-    addSprite(name, src){
+    addSprite(name:string, src:string){
         this.sprites.push({name, src});
     },
         
