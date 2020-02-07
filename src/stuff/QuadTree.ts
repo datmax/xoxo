@@ -10,7 +10,7 @@ class QuadTree{
     regions:QuadTree[] = []
     objs: Entity[] = []
 
-    max = 4
+    max = 5
 
     x:number
     y:number
@@ -37,8 +37,8 @@ class QuadTree{
         this.regions.push(new QuadTree(this.x,              this.w/2, this.y + this.h/ 2,   this.h/2)); //BOTTOM LEFT
         this.regions.push(new QuadTree(this.x + this.w/2,   this.w/2, this.y + this.h/ 2,   this.h/2)); //BOTTOM RIGHT
 
-        for(let i = 0; i < this.objs.length; i++){
-            this.insert(this.objs[i]);
+        for(let i = 0; i < temp.length; i++){
+            this.insert(temp[i]);
         }
 
     }
@@ -69,16 +69,16 @@ class QuadTree{
             return this.objs;
         }
         else{
-            if(obj.x > this.x && obj.x + obj.w < this.x + this.w/2 && obj.y > this.y && obj.y+obj.h < this.y + this.h){
+            if(obj.x >= this.x && obj.x + obj.w <= this.x + this.w/2 && obj.y >= this.y && obj.y+obj.h <= this.y + this.h/2){
                 return this.regions[0].queryObj(obj);
             }
-            if(obj.x > this.x + this.w/2 && obj.x + obj.w < this.x + this.w && obj.y > this.y && obj.y+obj.h < this.y + this.h){
+            if(obj.x >= this.x + this.w/2 && obj.x + obj.w <= this.x + this.w && obj.y >= this.y && obj.y+obj.h <= this.y + this.h/2){
                 return this.regions[1].queryObj(obj);
             }
-            if(obj.x > this.x && obj.x + obj.w < this.x + this.w/2 && obj.y > this.y + this.h/2 && obj.y + obj.h > this.y + this.h){
+            if(obj.x >= this.x && obj.x + obj.w <= this.x + this.w/2 && obj.y >= this.y + this.h/2 && obj.y + obj.h <= this.y + this.h){
                 return this.regions[2].queryObj(obj);
             }
-            if(obj.x > (this.x + this.w)/2 && obj.x + obj.w < this.x + this.w && obj.y > this.y + this.h/2 && obj.y + obj.h > this.y + this.h){
+            if(obj.x >= (this.x + this.w)/2 && obj.x + obj.w <= this.x + this.w && obj.y >= this.y + this.h/2 && obj.y + obj.h <= this.y + this.h){
                 return this.regions[3].queryObj(obj);
             }
         }
@@ -90,7 +90,6 @@ class QuadTree{
         if(this.regions.length>0){
             for(let i = 0; i < this.regions.length;i++){
                 this.regions[i].drawQuad(ctx);
-                console.log(this.regions[2]);
             }
         }
     }

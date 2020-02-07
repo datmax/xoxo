@@ -47,12 +47,13 @@ export default class Player extends Entity {
 
     checkCollisions(){
         let objs = game.quadTree.queryObj(this);
-        for(let i = 0; i < objs.length; i++){
+        console.log(objs);
+        /*for(let i = 0; i < objs.length; i++){
             if(this.x >= objs[i].x && this.x + this.w <= objs[i].x + objs[i].w 
                && this.y >= objs[i].y && this.y + this.h <= objs[i].y + objs[i].h && typeof objs[i] != typeof this){
                    console.log(objs[i]);
                }
-        }
+        }*/
     }
 
     render(): void {
