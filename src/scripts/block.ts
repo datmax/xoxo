@@ -1,5 +1,6 @@
 import Entity from "./entity";
 import utils from "../stuff/utils";
+import game from "../scripts/game";
 
 
 export default class Block extends Entity{
@@ -8,6 +9,8 @@ export default class Block extends Entity{
         this.w = w;
         this.h = h;
         utils.drawRect(this.x, this.y, this.w, this.h, this.ctx);
+        game.quadTree.insert(this);
+
     }
 
     

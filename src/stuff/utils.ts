@@ -1,68 +1,66 @@
 import Player from "../scripts/player";
 
-interface vector{
-    x:number,
-    y:number
+interface vector {
+    x: number,
+    y: number
 }
 
 
 const utils = {
 
-    eventHanlderDown(event:any, player:Player){
+
+    eventHanlderDown(event: any, player: Player) {
+        console.log(event);
+        console.log(player.moves);
+
         switch (event.key) {
             case "ArrowUp":
-                player.speed_x = 0;
-                player.speed_y = 10;
+                player.addMove("up");
                 break;
             case "ArrowDown":
-                player.speed_x = 0;
-                player.speed_y = -10;
+                player.addMove("down");
+
                 break;
             case "ArrowLeft":
-                player.speed_x = -10;
-                player.speed_y = 0;
+                player.addMove("left");
+
                 break;
             case "ArrowRight":
-                player.speed_x = 10;
-                player.speed_y = 0;
+                player.addMove("right");
                 break;
         }
     },
 
-    eventHanlderUp(event:any, player:Player){
+    eventHanlderUp(event: any, player: Player) {
         switch (event.key) {
             case "ArrowUp":
-                if(player.speed_y  > 0)
-                player.speed_y = 0;
+                player.removeMove("up")
                 break;
             case "ArrowLeft":
-                if(player.speed_x < 0)
-                player.speed_x = 0;
+                player.removeMove("left")
                 break;
             case "ArrowRight":
-                if(player.speed_x > 0)
-                player.speed_x = 0;
+                player.removeMove("right")
                 break;
             case "ArrowDown":
-                if(player.speed_y < 0)
-                player.speed_y = 0;
+                player.removeMove("down")
                 break;
         }
     },
 
 
-    drawRect(x:number,y:number,w:number,h:number,ctx:CanvasRenderingContext2D,color?:string): void{
-        if(color == null){
-            ctx.fillRect(x,y,w,h);
+    drawRect(x: number, y: number, w: number, h: number, ctx: CanvasRenderingContext2D, color?: string): void {
+        if (color == null) {
+            ctx.fillRect(x, y, w, h);
         }
-        else{
+        else {
             ctx.fillStyle = color;
-            ctx.fillRect(x,y,w,h);
+            ctx.fillRect(x, y, w, h);
         }
     },
 
-    clearRect(x:number,y:number,w:number,h:number,ctx:CanvasRenderingContext2D):void{
-        ctx.clearRect(x,y,w,h);
+    clearRect(x: number, y: number, w: number, h: number, ctx: CanvasRenderingContext2D): void {
+        ctx.clearRect(x, y, w, h);
     }
 
 }

@@ -10,18 +10,18 @@ const game = {
 
     //Global game objects
     //Still have to find a good way to implement physics
-    deltaTime:<number> 0.016,
-    objects:<Entity[]> [],
-    layers:<HTMLCanvasElement[]> [],
+    deltaTime: <number>0.016,
+    objects: <Entity[]>[],
+    layers: <HTMLCanvasElement[]>[],
     gravity: 10,
-    quadTree:<QuadTree> null,
-    sprites:<Sprite[]> [],
+    quadTree: <QuadTree>null,
+    sprites: <Sprite[]>[],
 
 
     //Add canvas with a given id, width and height;
-    addCanvas( w:number, h:number, id?:string,):void{
+    addCanvas(w: number, h: number, id?: string, ): void {
         let canvas = document.createElement("canvas");
-        if(id) canvas.id = id;
+        if (id) canvas.id = id;
         canvas.width = w;
         canvas.height = h;
     },
@@ -30,15 +30,16 @@ const game = {
         this.objects.push(obj);
     },
 
-    addSprite(name:string, src:string){
-        this.sprites.push({name, src});
+    addSprite(name: string, src: string) {
+        this.sprites.push({ name, src });
     },
-        
-    render(): void{
-        for(let i = 0; i < this.objects.length; i++){
+
+    render(): void {
+        for (let i = 0; i < this.objects.length; i++) {
+            this.objects[i].update();
             this.objects[i].render();
         }
-        window.requestAnimationFrame(()=>{
+        window.requestAnimationFrame(() => {
             this.render();
         })
     }
