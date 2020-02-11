@@ -23,19 +23,17 @@ window.onload = () =>{
     const player = new Player(30,120,5,5, ctx, 100);
     //const a = new Player(10,40,5,5, ctx, 100);
     for(let i = 0; i < 40; i++){
-        new Block(i*20, 100, 5, 5, ctx );
+        new Block((i+1)*40, 100, 10, 5, ctx );
     }
     for(let i = 0; i < 20; i++){
-        new Block(200 + i*6, i*20, 5, 5, ctx );
+        new Block(200 + i*10, i*20, 10, 5, ctx );
     }
     for(let i = 0; i < 20; i++){
-        new Block(220 + i*5, i*20, 5, 5, ctx );
+        new Block(220 + i*10, i*20, 10, 5, ctx );
     }
 
 
-
-
-    quadtree.drawQuad(ctx);
+    //quadtree.drawQuad(ctx);
 
 
     game.render();

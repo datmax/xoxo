@@ -10,8 +10,6 @@ const utils = {
 
 
     eventHanlderDown(event: any, player: Player) {
-        console.log(event);
-        console.log(player.moves);
 
         switch (event.key) {
             case "ArrowUp":
@@ -29,6 +27,8 @@ const utils = {
                 player.addMove("right");
                 break;
         }
+
+
     },
 
     eventHanlderUp(event: any, player: Player) {
@@ -61,7 +61,13 @@ const utils = {
 
     clearRect(x: number, y: number, w: number, h: number, ctx: CanvasRenderingContext2D): void {
         ctx.clearRect(x, y, w, h);
-    }
+    },
+
+    rectIntersect(a: number, b:number, a1:number, b1:number){
+        return  a+b >= a1 && a <= a1+b1;
+    },
+
+
 
 }
 

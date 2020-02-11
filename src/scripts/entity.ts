@@ -56,6 +56,9 @@ export default class Entity {
     }
   }
 
+  redraw():void{
+    utils.drawRect(this.x, this.y, this.w, this.h, this.ctx);
+}
 
 
   update():void{
