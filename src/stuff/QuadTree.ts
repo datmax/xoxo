@@ -3,7 +3,7 @@ import Entity from "../scripts/entity";
 import utils from "./utils";
 
 //----------------------------------------------------------------//
-//--------THIS TOOK ME AN ENTIRE FUCKING DAY AAAAAAAA-------------//
+//--------THIS TOOK ME AN ENTIRE FUCKING life AAAAAAAA-------------//
 //----------------------------------------------------------------//
 
 class QuadTree {
@@ -45,6 +45,10 @@ class QuadTree {
 
     }
 
+    /*getQuadsByLevel(level:number,x:number, y: number, w:number, h:number ){
+        if(this.level)
+    }*/
+
 
     insert(obj: Entity): void {
         if (this.objs.length >= this.max && this.regions.length == 0) {
@@ -68,22 +72,22 @@ class QuadTree {
 
     }
 
-    queryObj(obj: Entity): Entity[] {
+    queryObj(x:number,y:number,w:number,h): Entity[] {
         if (this.regions.length == 0) {
             return this.objs;
         }
         else {
-            if (obj.x + this.offset >= this.x && obj.x + obj.w <= this.x + this.w / 2 && obj.y >= this.y && obj.y + obj.h - this.offset <= this.y + this.h / 2) {
-                return this.regions[0].queryObj(obj);
+            if (x  >= this.x && x + w <= this.x + this.w / 2 && y >= this.y && y + h  <= this.y + this.h / 2) {
+                return this.regions[0].queryObj(x,y,w,h);
             }
-            if (obj.x + this.offset >= this.x + this.w / 2 && obj.x + obj.w - this.offset <= this.x + this.w && obj.y + this.offset >= this.y && obj.y + obj.h - this.offset <= this.y + this.h / 2) {
-                return this.regions[1].queryObj(obj);
+            if (x >= this.x + this.w / 2 && x + w   <= this.x + this.w && y  >= this.y && y + h   <= this.y + this.h / 2) {
+                return this.regions[1].queryObj(x,y,w,h);
             }
-            if (obj.x + this.offset >= this.x && obj.x + obj.w <= this.x + this.w / 2 && obj.y >= this.y + this.h / 2 && obj.y + obj.h - this.offset <= this.y + this.h) {
-                return this.regions[2].queryObj(obj);
+            if (x  >= this.x && x + w <= this.x + this.w / 2 && y >= this.y + this.h / 2 && y + h  <= this.y + this.h) {
+                return this.regions[2].queryObj(x,y,w,h);
             }
-            if (obj.x + this.offset >= this.x + this.w / 2 && obj.x + obj.w - this.offset <= this.x + this.w && obj.y + this.offset >= this.y + this.h / 2 && obj.y + obj.h - this.offset <= this.y + this.h) {
-                return this.regions[3].queryObj(obj);
+            if (x  >= this.x + this.w / 2 && x + w  <= this.x + this.w && y  >= this.y + this.h / 2 && y + h  <= this.y + this.h) {
+                return this.regions[3].queryObj(x,y,w,h);
             }
         }
     }

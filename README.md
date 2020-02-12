@@ -14,10 +14,11 @@
 # Features WIP:
 * quadtree smart query obj 
 * collision detection 
+* quadtree smart insert(for moving objects)
+  
 
 
 # Features i want to implement:
-* quadtree smart insert(for moving objects)
 * 2d raycasts, for possible shooting games or else(soon)
 * add images and spritesheets(soon)
 * event triggers(??)

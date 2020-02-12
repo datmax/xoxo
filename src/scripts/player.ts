@@ -12,6 +12,9 @@ export default class Player extends Entity {
     life: number
     velocity:number = 1
     moves: string[] = []
+    speedX: number = 0
+    speedY: number = 0
+
     constructor(x: number, y: number, w: number, h: number, ctx: CanvasRenderingContext2D, life: number) {
         super(x, y, ctx);
         this.w = w;
@@ -55,7 +58,12 @@ export default class Player extends Entity {
     }
 
     checkCollisions(): boolean {
-        let objs = game.quadTree.queryObj(this);
+        let objs = game.quadTree.queryObj(this.x, this.y, this.w, this.h);
+        if(this.speedX != 0 || this.speedY != 0){
+            let i = game.quadTree.queryObj(this.x+ this.speedX, this.y + this.speedY, this.w, this.h);
+            console.log(i);
+            if(i !== undefined && objs !== undefined) objs.concat(i)
+        }
         if(objs){
             for (let i = 0; i < objs.length; i++) {
                 if(utils.rectIntersect(this.x, this.w, objs[i].x, objs[i].w) && 
@@ -69,17 +77,30 @@ export default class Player extends Entity {
     updatePos():void{
     if(this.moves.length > 0){
         if(this.moves[0] == "up"){
+            this.speedX = 0;
+            this.speedY = this.velocity;
             this.move(0, this.velocity)
         }
         if(this.moves[0] == "down"){
+            this.speedX = 0;
+            this.speedY = -this.velocity;
             this.move(0, -this.velocity)
+
         }        
         if(this.moves[0] == "left"){
+            this.speedX = -this.velocity;
+            this.speedY = 0;
             this.move(-this.velocity, 0 )
         }        
         if(this.moves[0] == "right"){
+            this.speedX = +this.velocity;
+            this.speedY = 0;
             this.move(this.velocity, 0)
         }
+    }
+    else{
+        this.speedX = 0;
+        this.speedY = 0;
     }
         
     }
@@ -95,8 +116,7 @@ export default class Player extends Entity {
     }
 
     render(): void {
-            console.log(this.x, this.y);
-            utils.clearRect(this.x , this.y, this.w, this.h, this.ctx);
+            utils.clearRect(this.x - this.speedX, this.y + this.speedY, this.w, this.h, this.ctx);
             this.update();
             utils.drawRect(this.x, this.y, this.w, this.h, this.ctx, "black")
 

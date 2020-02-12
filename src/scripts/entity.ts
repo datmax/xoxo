@@ -34,8 +34,8 @@ export default class Entity {
   //This function is called ALWAYS betweeen a clear and a draw cycle, to not
   //have weird things happening
   move(x: number, y: number): void {
-    this.x += x;
-    this.y -= y;
+    this.x = Math.floor(this.x + x);
+    this.y = Math.floor(this.y - y);
   }
 
 

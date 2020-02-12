@@ -20,7 +20,7 @@ window.onload = () =>{
     const ctx = canvas.getContext("2d");
     const quadtree = new QuadTree(0,0, canvas.width, 0, canvas.height);
     game.quadTree = quadtree;
-    const player = new Player(30,120,5,5, ctx, 100);
+    const player = new Player(30,120,10,10, ctx, 100);
     //const a = new Player(10,40,5,5, ctx, 100);
     for(let i = 0; i < 40; i++){
         new Block((i+1)*40, 100, 10, 5, ctx );
@@ -33,7 +33,7 @@ window.onload = () =>{
     }
 
 
-    //quadtree.drawQuad(ctx);
+    quadtree.drawQuad(ctx);
 
 
     game.render();
